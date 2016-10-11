@@ -1,7 +1,7 @@
 # color-game
 
 <p align="center">
-    <img src="" alt="Universal Angular 2" height="320"/>
+    <img src="" alt="Color Game" height="320"/>
   
 </p>
 ## Installation
