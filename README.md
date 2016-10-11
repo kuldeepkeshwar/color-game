@@ -1,7 +1,7 @@
 # color-game
 
 <p align="center">
-    <img src="" alt="Color Game" height="320"/>
+    <img src="https://raw.githubusercontent.com/kuldeepkeshwar/color-game/master/main.png" alt="Color Game" height="320"/>
   
 </p>
 ## Installation
