@@ -1,0 +1,10 @@
+node_modules
+typings
+
+.vscode
+dist
+
+gulpfile.js
+gulpfile.js.map
+
+.DS_Store

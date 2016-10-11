@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="above-game">
+        <button class="btn btn-left" *ngIf="showChanceResult" (click)="continueGame()">Continue</button>
+        <button class="btn btn-left" *ngIf="showGameResult || !isStarted" (click)="showSetting()">Setting</button> 
+        <button class="btn" *ngIf="!isStarted" (click)="start()">Start</button>
+        <button class="btn" *ngIf="isStarted" (click)="newGame()">New Game</button>
+    </div>
+    <div class="game-container">
+        <div class="rTable" *ngIf="showGameBoard">
+            <div class="rTableBody">
+                <div class="rTableRow" *ngFor="let row of game.grid.getRows()">
+                    <div [ngClass]="{color:cell.data.state==-1,uncolor:cell.data.state==1}" class="rTableCell" *ngFor="let cell of row.getCells()"
+                        (click)="selectCell(cell)">
+                        <span [innerHTML]="cell.data.index"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="setting-container" *ngIf="showSettingBoard">
+            <p><label>Size</label><input type="text" [(ngModel)]="size"/></p>
+            <p><label>Timer</label><input type="text" [(ngModel)]="time"/></p>
+            <p><label>Lifes</label><input type="text" [(ngModel)]="chances"/></p>
+            <p><label>Box to color</label><input type="text" [(ngModel)]="minCells"/></p> 
+        </div>
+        <div class="game-message ">
+            <div *ngIf="showChanceResult">
+                <p>{{state.pendingChange}} chance left</p>
+            </div>
+            <div *ngIf="showGameResult">
+                <p *ngIf="state.state==1">Won!!</p>
+                <p *ngIf="state.state==-1">Game Over!</p>
+            </div>
+        </div>
+
+    </div>
+</div>

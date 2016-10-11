@@ -1,0 +1,107 @@
+.rTable {
+  display: table;
+  width: 100%;
+}
+.rTableRow {
+    display: table-row;
+}
+.rTableCell{
+    text-align: center;
+    font-size: 28px;
+    cursor: pointer;
+    display: table-cell;
+    padding: 3px 10px;
+    border: 10px solid #999999;
+}
+.rTableBody {
+    display: table-row-group;
+}
+.color {
+    background-color: red;
+}
+.uncolor {
+    background-color: green;
+}
+.above-game:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.container {
+    width: 500px;
+    margin: 0 auto;
+}
+p{
+    font-size: 29px;
+    font-weight: bold;
+    height: 170px;
+    margin-top: 25px;
+}
+.setting-container p {
+    
+    font-size: 20px;
+    height: 20px;
+    margin-top: 25px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+label {
+    float: left;
+}
+input[type="text"] {
+    float: right;
+}
+.game-message {
+     top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding-top: 40px;
+    text-align: center;
+    -webkit-animation: fade-in 800ms ease 1200ms;
+    -moz-animation: fade-in 800ms ease 1200ms;
+    animation: fade-in 800ms ease 1200ms;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+.game-container{
+    margin-top: 40px;
+    position: relative;
+    padding: 15px;
+    cursor: default;
+    -webkit-touch-callout: none;
+    -ms-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -ms-touch-action: none;
+    touch-action: none;
+    background: #bbada0;
+    border-radius: 6px;
+    width: 500px;
+    /*height: 500px;*/
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; 
+    box-sizing: border-box;
+}
+.btn {
+    background: #8f7a66;
+    border-radius: 3px;
+    padding: 0 20px;
+    text-decoration: none;
+    color: #f9f6f2;
+    height: 40px;
+    /* line-height: 42px; */
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    float: right;
+    font-size: 18px;
+}
+.btn:focus{
+    outline: -webkit-focus-ring-color auto 0px;
+}
+.btn-left {
+    float: left;
+}
