@@ -2,8 +2,8 @@
     <div class="above-game">
         <button class="btn btn-left" *ngIf="showChanceResult" (click)="continueGame()">Continue</button>
         <button class="btn btn-left" *ngIf="showGameResult || !isStarted" (click)="showSetting()">Setting</button> 
-        <button class="btn" *ngIf="!isStarted" (click)="start()">Start</button>
-        <button class="btn" *ngIf="isStarted" (click)="newGame()">New Game</button>
+        <button class="btn" *ngIf="!isStarted && !showSettingBoard" (click)="start()">Start</button>
+        <button class="btn" *ngIf="showGameResult || showSettingBoard" (click)="newGame()">New Game</button>
     </div>
     <div class="game-container">
         <div class="rTable" *ngIf="showGameBoard">
@@ -17,10 +17,13 @@
             </div>
         </div>
         <div class="setting-container" *ngIf="showSettingBoard">
-            <p><label>Size</label><input type="text" [(ngModel)]="size"/></p>
-            <p><label>Timer</label><input type="text" [(ngModel)]="time"/></p>
-            <p><label>Lifes</label><input type="text" [(ngModel)]="chances"/></p>
-            <p><label>Box to color</label><input type="text" [(ngModel)]="minCells"/></p> 
+            <form name="settingform" #settingform> 
+                <p><label>Size</label><input type="text" name="size" [(ngModel)]="size" (ngModelChange)="onSettingChange(settingform)" pattern="^\+?([1-9]\d*)$"  /></p>
+                <p><label>Timer</label><input type="text" name="time" [(ngModel)]="time" (ngModelChange)="onSettingChange(settingform)"  pattern="^\+?([1-9]\d*)$" required/></p>
+                <p><label>Lifes</label><input type="text" name="chances" [(ngModel)]="chances" (ngModelChange)="onSettingChange(settingform)"  pattern="^\+?([1-9]\d*)$" required/></p>
+                <p><label>Box to color</label><input type="text" name="minCells" [(ngModel)]="minCells" (ngModelChange)="onSettingChange(settingform)" required pattern="^\+?([1-9]\d*)$"/></p> 
+            </form>
+            
         </div>
         <div class="game-message ">
             <div *ngIf="showChanceResult">

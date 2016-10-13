@@ -22,6 +22,9 @@
 .uncolor {
     background-color: green;
 }
+.above-game {
+    height: 14px;
+}
 .above-game:after {
     content: "";
     display: block;

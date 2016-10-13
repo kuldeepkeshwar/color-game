@@ -1,4 +1,4 @@
-import { Table } from  './table';
+import { Table } from './table';
 import { Row } from './row';
 import { Cell } from './cell';
 import { Observable, Subject } from "rxjs";
@@ -33,15 +33,16 @@ export class Game {
         this.startTimer();
     }
     public unColorCell(cell: Cell) {
-        if (cell.data.state!==0) {
+        if (cell.data.state !== 0) {
             cell.data.state = 1;
+            let colorCount = this.activeCells.filter(cell => cell.data.state === -1).length;
+            if (colorCount === 0) {
+                this.finish.next(new GameState(this.chance, 1));
+                this.stop();
+            }
         }
 
-        let colorCount=this.activeCells.filter(cell => cell.data.state===-1).length;
-        if(colorCount===0){
-            this.finish.next(new GameState(this.chance, 1));
-            this.stop();
-        }
+
     }
     public stop() {
         clearTimeout(this.timerId);
@@ -56,42 +57,42 @@ export class Game {
     }
     private resetBoard() {
         this.chance = this.chance - 1;
-        let totoalCells=this.size*this.size;
+        let totoalCells = this.size * this.size;
         //reset game board by comsuming current state and produce a new state
         // get all active cell index, ask for new cells, reset and remove unColored Cells ,add new cells
-        let _obj=this.activeCells.reduce((obj,cell)=>{
-            obj.active.push(cell.data.index-1);
-            if(cell.data.state === 1){
-                if(obj.unColorCount>=totoalCells-this.activeCells.length){//edge case
-                    cell.data.state=-1;
+        let _obj = this.activeCells.reduce((obj, cell) => {
+            obj.active.push(cell.data.index - 1);
+            if (cell.data.state === 1) {
+                if (obj.unColorCount >= totoalCells - this.activeCells.length) {//edge case
+                    cell.data.state = -1;
                     obj.colorCell.push(cell);
 
-                }else{
+                } else {
                     obj.unColorCount++;
-                    cell.data.state=0;
+                    cell.data.state = 0;
                 }
-                
-            }else{
+
+            } else {
                 obj.colorCell.push(cell);
             }
             return obj;
-        },{
-            active:[],
-            unColorCount:0,
-            colorCell:[]
-        });
-        
+        }, {
+                active: [],
+                unColorCount: 0,
+                colorCell: []
+            });
+
         let newIndexs = Util.randomNumberWithExcludes(0, totoalCells - 1, _obj.unColorCount, _obj.active);
-        this.activeCells=_obj.colorCell.concat(newIndexs.map((index) => {
-             let cell = this.grid.getCellByIndex(index);
-             cell.data.state = -1;
-             return cell;
+        this.activeCells = _obj.colorCell.concat(newIndexs.map((index) => {
+            let cell = this.grid.getCellByIndex(index);
+            cell.data.state = -1;
+            return cell;
         }));
 
-    } 
+    }
     private colorCells() {
         let indexs: Array<number> = Util.randomNumberWithExcludes(0, this.size * this.size - 1, this.minCells, []);
-        this.activeCells=indexs.map((index) => {
+        this.activeCells = indexs.map((index) => {
             let cell = this.grid.getCellByIndex(index);
             cell.data.state = -1; //coloring cell
             return cell;
@@ -134,20 +135,20 @@ export class Game {
         this.finish = new Subject<GameState>();
 
     }
-    private validate(){
-        if(this.time<=0){
+    private validate() {
+        if (this.time <= 0) {
             throw new Error("time should be greater than 0");
         }
-        if(this.chances<=0){
+        if (this.chances <= 0) {
             throw new Error("chances should be greater than 0");
         }
-        if(this.size<=0){
+        if (this.size <= 0) {
             throw new Error("size should be greater than 0");
         }
-        if(this.minCells<=0){
+        if (this.minCells <= 0) {
             throw new Error("minCells should be greater than 0");
         }
-        if(this.minCells>this.size*this.size){
+        if (this.minCells > this.size * this.size) {
             throw new Error("minCells should be less than size*size");
         }
     }

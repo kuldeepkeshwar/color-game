@@ -28,6 +28,14 @@ export class AppComponent implements OnInit {
         this.minCells = 5;
         this.init();
     }
+    public onSettingChange(form:any){//TODO show validation messages
+        setTimeout(()=>{
+            if(form.className.includes("ng-valid")){
+                this.init(); 
+                this.showGameBoard = false; 
+            }
+        });
+    }
     public selectCell(cell: Cell) {
         this.game.unColorCell(cell);
     }
@@ -69,6 +77,7 @@ export class AppComponent implements OnInit {
             this.showGameBoard = false;
         });
         let unSubscribeFinish=this.game.onFinish().subscribe((state) => {
+           
             this.state = state;
             this.showChanceResult = false;
             this.showGameResult = true;
