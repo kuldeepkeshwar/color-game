@@ -1,7 +1,5 @@
 # color-game
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/kuldeepkeshwar/color-game.svg)](https://greenkeeper.io/)
-
 <p align="center">
     <img src="https://raw.githubusercontent.com/kuldeepkeshwar/color-game/master/main.png" alt="Color Game" height="320"/>
   
